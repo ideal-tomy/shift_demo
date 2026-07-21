@@ -17,7 +17,7 @@ npm run dev
 VITE_ROI_SIMULATOR_URL=http://localhost:5173
 ```
 
-遷移先: `/?kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya`
+遷移先: `/?brand=ideal&kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya`
 
 ## ドキュメント
 

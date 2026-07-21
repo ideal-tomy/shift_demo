@@ -1,4 +1,5 @@
 const ROI_PARAMS = {
+  brand: "ideal",
   kit: "shift-management",
   industry: "other",
   cat: "dashboard",

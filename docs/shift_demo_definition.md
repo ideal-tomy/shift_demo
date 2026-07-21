@@ -110,7 +110,7 @@ Default: `sample`
 
 - 正本アプリ: ワークスペース内 `roi-simulator`
 - 環境変数: `VITE_ROI_SIMULATOR_URL`
-- 遷移: `/?kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya`
+- 遷移: `/?brand=ideal&kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya`
 - 主表示: 経営面・タイムカウンター直下（別タブ）
 - 副表示: 店長面「確定して通知」成功後
 - 未設定時: CTA 非表示（体験本体は不変）

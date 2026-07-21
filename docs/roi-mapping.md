@@ -13,18 +13,20 @@
 ## 1. URL 契約
 
 ```text
-{VITE_ROI_SIMULATOR_URL}/?kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya
+{VITE_ROI_SIMULATOR_URL}/?brand=ideal&kit=shift-management&industry=other&cat=dashboard&from=shift-minatoya
 ```
 
 | パラメータ | 値 | 理由 |
 |---|---|---|
+| `brand` | `ideal` | みなと屋デモは ideal ブランドで投資回収を開く |
 | `kit` | `shift-management` | 既存 kit。新規 JSON は作らない（突合・微調整のみ） |
 | `industry` | `other` | 飲食専用 preset なし。CS の restaurant パックと同様に `other` |
 | `cat` | `dashboard` | 経営面・タイムカウンター締めが体験ピーク。管理・経営カテゴリと一致 |
 | `from` | `shift-minatoya` | リード追跡用。ブランド「みなと屋」とデモを紐づけ |
 
 - 開き方: **別タブ**（`target="_blank"`）。`embed=1` は使わない
-- 環境変数: `VITE_ROI_SIMULATOR_URL`（Vite 想定）。未設定時は CTA 非表示
+- 環境変数: `VITE_ROI_SIMULATOR_URL`（**オリジンのみ**。例 `https://roi-simulator-eta.vercel.app`）。`?brand=` は env に付けない（`roiLink.ts` が付与）
+- 未設定時: CTA 非表示
 
 ---
 
