@@ -68,7 +68,7 @@ export function StaffView() {
     d.toggleWishDraft(editDate, slotId);
   };
   return (
-    <div className="viewBody">
+    <div className="viewBody hasBottomBar">
       <div className="stickyHead staffSticky">
         <select
           className="selectCtrl grow"

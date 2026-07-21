@@ -85,7 +85,7 @@ export function ManagerView() {
   })();
 
   return (
-    <div className="viewBody">
+    <div className="viewBody hasBottomBar">
       <div className="stickyHead">
         <select
           className="selectCtrl"

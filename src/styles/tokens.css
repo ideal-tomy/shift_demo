@@ -118,6 +118,11 @@ select {
   min-width: 0;
 }
 
+/* 固定フッター（最適案／提出）2段分の下余白 */
+.viewBody.hasBottomBar {
+  padding-bottom: calc(152px + env(safe-area-inset-bottom));
+}
+
 .ownerView.viewBody,
 .ownerView .viewBody {
   padding-bottom: 32px;
@@ -541,6 +546,7 @@ select {
 
 .roiPaybackCta {
   margin-top: 12px;
+  margin-bottom: 8px;
   padding: 14px 16px;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -583,7 +589,7 @@ select {
 .toast {
   position: fixed;
   left: 50%;
-  bottom: calc(88px + env(safe-area-inset-bottom));
+  bottom: calc(152px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
   z-index: 50;
   max-width: min(420px, calc(100% - 32px));
