@@ -1,0 +1,864 @@
+:root {
+  --ink: #101826;
+  --paper: #f7f8fa;
+  --surface: #ffffff;
+  --line: #e3e7ed;
+  --muted: #6b7686;
+  --ember: #c97b3d;
+  --ok: #1d8a66;
+  --warn: #d98e1f;
+  --bad: #c6453f;
+  --info: #2f6fb2;
+  --radius-card: 12px;
+  --radius-ctrl: 8px;
+  --font: "Noto Sans JP", system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.tnum {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.appShell {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.appShell.isOwner {
+  max-width: 960px;
+}
+
+.brandBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: #fff;
+}
+
+.brandBar h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.brandBar .sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: color-mix(in srgb, #fff 65%, transparent);
+}
+
+.roleTabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.roleTabs button {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.roleTabs button.active {
+  color: var(--ink);
+  border-bottom-color: var(--ember);
+}
+
+.viewBody {
+  flex: 1;
+  padding: 12px 16px 88px;
+  overflow: auto;
+}
+
+.ownerView .viewBody {
+  padding-bottom: 32px;
+}
+
+.stickyHead {
+  position: sticky;
+  top: 46px;
+  z-index: 15;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  margin: -12px -16px 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.selectCtrl,
+.textCtrl {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  background: var(--surface);
+}
+
+.ringStat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ringStat strong {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.weekGrid {
+  display: grid;
+  grid-template-columns: 72px repeat(7, minmax(44px, 1fr));
+  gap: 4px;
+  font-size: 11px;
+}
+
+.weekHead,
+.weekLabel {
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.weekLabel {
+  text-align: left;
+  font-size: 11px;
+}
+
+.cell {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  position: relative;
+  padding: 4px;
+}
+
+.cell:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.cell.isShort {
+  border-color: color-mix(in srgb, var(--bad) 55%, var(--line));
+  background: color-mix(in srgb, var(--bad) 8%, var(--surface));
+}
+
+.cell .count {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.cell .badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 99px;
+  background: var(--bad);
+  color: #fff;
+  font-size: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.cell .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--warn);
+}
+
+.bottomBar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: min(480px, 100%);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 30;
+}
+
+.primaryBtn,
+.ghostBtn,
+.dangerBtn {
+  min-height: 44px;
+  border-radius: var(--radius-ctrl);
+  border: 0;
+  padding: 0 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.primaryBtn {
+  background: var(--ink);
+  color: #fff;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ghostBtn {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.dangerBtn {
+  background: color-mix(in srgb, var(--bad) 12%, var(--surface));
+  color: var(--bad);
+  border: 1px solid color-mix(in srgb, var(--bad) 35%, var(--line));
+}
+
+.liveLog {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--ember);
+  background: color-mix(in srgb, var(--ember) 8%, var(--surface));
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.liveLog li {
+  margin: 0 0 4px;
+}
+
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+  z-index: 40;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sheet {
+  width: min(480px, 100%);
+  max-height: 70dvh;
+  overflow: auto;
+  background: var(--surface);
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+}
+
+.sheet h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.candidateRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  min-height: 44px;
+}
+
+.candidateRow button {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.timeCounter {
+  border: 1px solid color-mix(in srgb, var(--ember) 45%, var(--line));
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--ember) 7%, var(--surface));
+}
+
+.timeCounter .label {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.timeCounter .value {
+  margin: 6px 0 0;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ember);
+  letter-spacing: -0.02em;
+}
+
+.timeCounter .value span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0 4px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  background: var(--surface);
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card p,
+.card li {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.alertList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alertList li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.alertList .red {
+  color: var(--bad);
+}
+
+.alertList .amber {
+  color: var(--warn);
+}
+
+.lineCard {
+  border-radius: 12px;
+  background: #06c755;
+  color: #fff;
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+
+.lineCard .meta {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.lineCard .body {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.note {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.chip {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chip.active {
+  border-color: var(--ember);
+  color: var(--ember);
+  background: color-mix(in srgb, var(--ember) 10%, var(--surface));
+}
+
+.slotPick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.slotPick button {
+  min-height: 44px;
+  min-width: 72px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.slotPick button.on {
+  border-color: var(--ember);
+  background: color-mix(in srgb, var(--ember) 12%, var(--surface));
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 14px;
+}
+
+.kpi .k {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.kpi .v {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.storeCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.roiPaybackCta {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.roiPaybackCtaTitle {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.roiPaybackCtaLead {
+  margin: 6px 0 12px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.roiPaybackCtaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--ink);
+  text-decoration: none;
+}
+
+.roiPaybackCtaButton:hover {
+  filter: brightness(0.95);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: min(420px, calc(100% - 32px));
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.sheetBody {
+  max-height: 48dvh;
+  overflow: auto;
+}
+
+.ctaBadge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  margin-left: 8px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background: var(--ember);
+  color: #fff;
+  font-size: 12px;
+}
+
+.selectCtrl.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.staffSticky {
+  flex-wrap: wrap;
+}
+
+.chipRow.compact {
+  margin: 0;
+}
+
+.weekHint {
+  margin-top: 8px;
+}
+
+.cell.staffCell.is-empty {
+  background: var(--paper);
+}
+
+.cell.staffCell.is-draft {
+  border-style: dashed;
+  border-color: var(--ember);
+  background: color-mix(in srgb, var(--ember) 12%, var(--surface));
+}
+
+.cell.staffCell.is-submitted {
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--line));
+  background: color-mix(in srgb, var(--ok) 10%, var(--surface));
+}
+
+.cell.staffCell.is-confirmed {
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 8%, var(--surface));
+}
+
+.cell .mark {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.cell.isPending {
+  opacity: 0.35;
+  background: var(--paper);
+}
+
+.nameBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.nameBtn .note {
+  display: block;
+}
+
+.placeTargetBtn {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin: 0 0 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  background: var(--paper);
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.placeTargetBtn:active {
+  border-color: var(--ember);
+}
+
+.approachCard {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.approachSend {
+  width: 100%;
+}
+
+.liveLogWrap {
+  margin-bottom: 8px;
+}
+
+.reasonBtn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.linkish {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.profileBlock {
+  margin-bottom: 12px;
+}
+
+.profileTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profileContract {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.profileSection {
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.profileList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.alertInline.red {
+  color: var(--bad);
+}
+
+.alertInline.amber {
+  color: var(--warn);
+}
+
+.reasonList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ownerSection {
+  margin-top: 16px;
+}
+
+.ownerSectionTitle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.proposalList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proposalCard {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.proposalCard:active {
+  border-color: var(--ember);
+}
+
+.storeAccordion {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.accItem + .accItem {
+  border-top: 1px solid var(--line);
+}
+
+.accHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.accHead.demoToggle {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  margin-bottom: 8px;
+}
+
+.accMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.needDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--bad);
+}
+
+.accBody {
+  padding: 0 14px 14px;
+  background: var(--paper);
+}
+
+.sheetFooterCol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ownerKpiDesktop {
+  margin-top: 16px;
+}
+
+.ownerDesktopOnly {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .appShell.isOwner {
+    max-width: 480px;
+  }
+
+  .ownerKpiDesktop {
+    display: none;
+  }
+
+  .ownerDesktopOnly {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) {
+  .ownerDesktopOnly {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

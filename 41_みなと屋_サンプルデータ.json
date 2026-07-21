@@ -1,0 +1,1578 @@
+{
+ "_readme": "「大衆酒場 みなと屋」シフト管理デモ用サンプルデータ。全員架空。基本モード=3店舗25名を実データで収録、8店舗モードの追加55名はscale_mode_specの規則から決定的に生成する。週は2026-07-20(月)〜07-26(日)。",
+ "schema_version": "1.0",
+ "week": [
+  "2026-07-20",
+  "2026-07-21",
+  "2026-07-22",
+  "2026-07-23",
+  "2026-07-24",
+  "2026-07-25",
+  "2026-07-26"
+ ],
+ "day_types": {
+  "2026-07-20": "平日",
+  "2026-07-21": "平日",
+  "2026-07-22": "平日",
+  "2026-07-23": "平日",
+  "2026-07-24": "金曜",
+  "2026-07-25": "土日",
+  "2026-07-26": "土日"
+ },
+ "stores": [
+  {
+   "id": "st01",
+   "name": "横浜西口店",
+   "area": "横浜",
+   "size": "large",
+   "scale_mode_only": false,
+   "has_late_slot": true
+  },
+  {
+   "id": "st02",
+   "name": "関内店",
+   "area": "横浜",
+   "size": "medium",
+   "scale_mode_only": false,
+   "has_late_slot": false
+  },
+  {
+   "id": "st03",
+   "name": "戸塚店",
+   "area": "横浜",
+   "size": "small",
+   "scale_mode_only": false,
+   "has_late_slot": false
+  },
+  {
+   "id": "st04",
+   "name": "川崎店",
+   "area": "川崎",
+   "size": "large",
+   "scale_mode_only": true,
+   "has_late_slot": true
+  },
+  {
+   "id": "st05",
+   "name": "武蔵小杉店",
+   "area": "川崎",
+   "size": "medium",
+   "scale_mode_only": true,
+   "has_late_slot": false
+  },
+  {
+   "id": "st06",
+   "name": "上大岡店",
+   "area": "横浜",
+   "size": "medium",
+   "scale_mode_only": true,
+   "has_late_slot": false
+  },
+  {
+   "id": "st07",
+   "name": "平沼橋店",
+   "area": "横浜",
+   "size": "small",
+   "scale_mode_only": true,
+   "has_late_slot": false
+  },
+  {
+   "id": "st08",
+   "name": "桜木町店",
+   "area": "横浜",
+   "size": "small",
+   "scale_mode_only": true,
+   "has_late_slot": false
+  }
+ ],
+ "roles": [
+  "フロア",
+  "キッチン",
+  "リーダー"
+ ],
+ "time_slots": [
+  {
+   "id": "lunch",
+   "label": "ランチ",
+   "time": "11:00-15:00"
+  },
+  {
+   "id": "dinner",
+   "label": "ディナー",
+   "time": "17:00-22:00"
+  },
+  {
+   "id": "late",
+   "label": "深夜",
+   "time": "22:00-24:00"
+  }
+ ],
+ "demand_templates": [
+  {
+   "store_id": "st01",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 3
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 3,
+      "リーダー": 1
+     },
+     "late": {
+      "フロア": 1,
+      "キッチン": 1
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 3,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 4,
+      "キッチン": 3,
+      "リーダー": 1
+     },
+     "late": {
+      "フロア": 1,
+      "キッチン": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st02",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 3,
+      "リーダー": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st03",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 1,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st04",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 3
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 3,
+      "リーダー": 1
+     },
+     "late": {
+      "フロア": 1,
+      "キッチン": 1
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 3,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 4,
+      "キッチン": 3,
+      "リーダー": 1
+     },
+     "late": {
+      "フロア": 1,
+      "キッチン": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st05",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 3,
+      "リーダー": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st06",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 2
+     },
+     "dinner": {
+      "フロア": 3,
+      "キッチン": 3,
+      "リーダー": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st07",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 1,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    }
+   }
+  },
+  {
+   "store_id": "st08",
+   "templates": {
+    "平日": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 1,
+      "キッチン": 2
+     }
+    },
+    "金曜": {
+     "lunch": {
+      "フロア": 1,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2
+     }
+    },
+    "土日": {
+     "lunch": {
+      "フロア": 2,
+      "キッチン": 1
+     },
+     "dinner": {
+      "フロア": 2,
+      "キッチン": 2,
+      "リーダー": 1
+     }
+    }
+   }
+  }
+ ],
+ "staff": [
+  {
+   "id": "stf01",
+   "name": "田中 悠斗",
+   "store_id": "st01",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1150,
+   "is_minor": false,
+   "absence_rate": 16,
+   "can_help_stores": [],
+   "weekly_hours_cap": 28,
+   "employment": "アルバイト",
+   "note": "シーン4の欠勤役。欠勤率高め"
+  },
+  {
+   "id": "stf02",
+   "name": "鈴木 このは",
+   "store_id": "st01",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1180,
+   "is_minor": false,
+   "absence_rate": 4,
+   "can_help_stores": [
+    "st02"
+   ],
+   "weekly_hours_cap": 25,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf03",
+   "name": "高橋 蓮",
+   "store_id": "st01",
+   "roles": [
+    "フロア",
+    "リーダー"
+   ],
+   "skill_level": 5,
+   "hourly_wage": 1420,
+   "is_minor": false,
+   "absence_rate": 1,
+   "can_help_stores": [
+    "st02",
+    "st03"
+   ],
+   "weekly_hours_cap": 40,
+   "employment": "社員",
+   "note": "店長代理クラス"
+  },
+  {
+   "id": "stf04",
+   "name": "伊藤 美咲",
+   "store_id": "st01",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1180,
+   "is_minor": false,
+   "absence_rate": 6,
+   "can_help_stores": [],
+   "weekly_hours_cap": 20,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf05",
+   "name": "渡辺 大和",
+   "store_id": "st01",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 4,
+   "hourly_wage": 1350,
+   "is_minor": false,
+   "absence_rate": 2,
+   "can_help_stores": [
+    "st02"
+   ],
+   "weekly_hours_cap": 40,
+   "employment": "社員",
+   "note": "焼き場責任者"
+  },
+  {
+   "id": "stf06",
+   "name": "山本 结衣",
+   "store_id": "st01",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1280,
+   "is_minor": false,
+   "absence_rate": 5,
+   "can_help_stores": [],
+   "weekly_hours_cap": 24,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf07",
+   "name": "中村 颯太",
+   "store_id": "st01",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1220,
+   "is_minor": false,
+   "absence_rate": 9,
+   "can_help_stores": [],
+   "weekly_hours_cap": 22,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf08",
+   "name": "小林 陽菜",
+   "store_id": "st01",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 1,
+   "hourly_wage": 1120,
+   "is_minor": true,
+   "absence_rate": 3,
+   "can_help_stores": [],
+   "weekly_hours_cap": 15,
+   "employment": "アルバイト(高校生)",
+   "note": "22時以降不可"
+  },
+  {
+   "id": "stf09",
+   "name": "加藤 湊",
+   "store_id": "st01",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1280,
+   "is_minor": false,
+   "absence_rate": 7,
+   "can_help_stores": [
+    "st03"
+   ],
+   "weekly_hours_cap": 26,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf10",
+   "name": "吉田 芽依",
+   "store_id": "st01",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1150,
+   "is_minor": false,
+   "absence_rate": 11,
+   "can_help_stores": [],
+   "weekly_hours_cap": 18,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf11",
+   "name": "山田 拓海",
+   "store_id": "st01",
+   "roles": [
+    "フロア",
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1250,
+   "is_minor": false,
+   "absence_rate": 5,
+   "can_help_stores": [
+    "st02"
+   ],
+   "weekly_hours_cap": 30,
+   "employment": "アルバイト",
+   "note": "両ポジ対応"
+  },
+  {
+   "id": "stf12",
+   "name": "佐藤 健一",
+   "store_id": "st02",
+   "roles": [
+    "フロア",
+    "リーダー"
+   ],
+   "skill_level": 4,
+   "hourly_wage": 1400,
+   "is_minor": false,
+   "absence_rate": 2,
+   "can_help_stores": [
+    "st01"
+   ],
+   "weekly_hours_cap": 40,
+   "employment": "社員",
+   "note": "シーン5の応援役"
+  },
+  {
+   "id": "stf13",
+   "name": "佐々木 心春",
+   "store_id": "st02",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1180,
+   "is_minor": false,
+   "absence_rate": 5,
+   "can_help_stores": [],
+   "weekly_hours_cap": 24,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf14",
+   "name": "山口 楓",
+   "store_id": "st02",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1150,
+   "is_minor": false,
+   "absence_rate": 8,
+   "can_help_stores": [],
+   "weekly_hours_cap": 20,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf15",
+   "name": "松本 一真",
+   "store_id": "st02",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 4,
+   "hourly_wage": 1350,
+   "is_minor": false,
+   "absence_rate": 3,
+   "can_help_stores": [
+    "st01"
+   ],
+   "weekly_hours_cap": 38,
+   "employment": "社員",
+   "note": ""
+  },
+  {
+   "id": "stf16",
+   "name": "井上 咲良",
+   "store_id": "st02",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1280,
+   "is_minor": false,
+   "absence_rate": 6,
+   "can_help_stores": [],
+   "weekly_hours_cap": 24,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf17",
+   "name": "木村 悠",
+   "store_id": "st02",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1220,
+   "is_minor": false,
+   "absence_rate": 10,
+   "can_help_stores": [],
+   "weekly_hours_cap": 20,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf18",
+   "name": "林 美月",
+   "store_id": "st02",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 1,
+   "hourly_wage": 1120,
+   "is_minor": true,
+   "absence_rate": 4,
+   "can_help_stores": [],
+   "weekly_hours_cap": 14,
+   "employment": "アルバイト(高校生)",
+   "note": "22時以降不可"
+  },
+  {
+   "id": "stf19",
+   "name": "斎藤 大地",
+   "store_id": "st02",
+   "roles": [
+    "フロア",
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1250,
+   "is_minor": false,
+   "absence_rate": 6,
+   "can_help_stores": [
+    "st01",
+    "st03"
+   ],
+   "weekly_hours_cap": 28,
+   "employment": "アルバイト",
+   "note": "両ポジ対応"
+  },
+  {
+   "id": "stf20",
+   "name": "清水 陽向",
+   "store_id": "st03",
+   "roles": [
+    "フロア",
+    "リーダー"
+   ],
+   "skill_level": 4,
+   "hourly_wage": 1380,
+   "is_minor": false,
+   "absence_rate": 3,
+   "can_help_stores": [],
+   "weekly_hours_cap": 40,
+   "employment": "社員",
+   "note": "戸塚店の要"
+  },
+  {
+   "id": "stf21",
+   "name": "森 結菜",
+   "store_id": "st03",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1150,
+   "is_minor": false,
+   "absence_rate": 7,
+   "can_help_stores": [],
+   "weekly_hours_cap": 22,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf22",
+   "name": "池田 蒼",
+   "store_id": "st03",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1280,
+   "is_minor": false,
+   "absence_rate": 5,
+   "can_help_stores": [
+    "st02"
+   ],
+   "weekly_hours_cap": 26,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf23",
+   "name": "橋本 凛",
+   "store_id": "st03",
+   "roles": [
+    "キッチン"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1220,
+   "is_minor": false,
+   "absence_rate": 12,
+   "can_help_stores": [],
+   "weekly_hours_cap": 20,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf24",
+   "name": "阿部 悠真",
+   "store_id": "st03",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 3,
+   "hourly_wage": 1180,
+   "is_minor": false,
+   "absence_rate": 4,
+   "can_help_stores": [],
+   "weekly_hours_cap": 24,
+   "employment": "アルバイト",
+   "note": ""
+  },
+  {
+   "id": "stf25",
+   "name": "石川 紬",
+   "store_id": "st03",
+   "roles": [
+    "フロア"
+   ],
+   "skill_level": 2,
+   "hourly_wage": 1150,
+   "is_minor": false,
+   "absence_rate": 9,
+   "can_help_stores": [],
+   "weekly_hours_cap": 18,
+   "employment": "アルバイト",
+   "note": ""
+  }
+ ],
+ "submissions": [
+  {
+   "staff_id": "stf01",
+   "submitted_at": "2026-07-15",
+   "days": [
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf02",
+   "submitted_at": "2026-07-17",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf03",
+   "submitted_at": "2026-07-17",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf05",
+   "submitted_at": "2026-07-15",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf06",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf08",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf09",
+   "submitted_at": "2026-07-15",
+   "days": [
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf11",
+   "submitted_at": "2026-07-17",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf12",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf13",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf15",
+   "submitted_at": "2026-07-18",
+   "days": [
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf16",
+   "submitted_at": "2026-07-15",
+   "days": [
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf18",
+   "submitted_at": "2026-07-17",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf19",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf20",
+   "submitted_at": "2026-07-18",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "lunch"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf21",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf22",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-23",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    }
+   ]
+  },
+  {
+   "staff_id": "stf24",
+   "submitted_at": "2026-07-16",
+   "days": [
+    {
+     "date": "2026-07-20",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-22",
+     "slots": [
+      "dinner"
+     ]
+    },
+    {
+     "date": "2026-07-24",
+     "slots": [
+      "dinner",
+      "late"
+     ]
+    },
+    {
+     "date": "2026-07-25",
+     "slots": [
+      "lunch"
+     ]
+    },
+    {
+     "date": "2026-07-26",
+     "slots": [
+      "dinner"
+     ]
+    }
+   ]
+  }
+ ],
+ "scale_mode_spec": {
+  "count_per_store": {
+   "st04": 13,
+   "st05": 11,
+   "st06": 11,
+   "st07": 10,
+   "st08": 10
+  },
+  "rules": {
+   "skill_distribution": {
+    "1": 0.15,
+    "2": 0.3,
+    "3": 0.35,
+    "4": 0.15,
+    "5": 0.05
+   },
+   "roles": "各店舗にリーダー役1名以上、フロア:キッチン=6:4、両ポジ対応を各店1〜2名",
+   "wage_by_role": {
+    "フロア": [
+     1120,
+     1250
+    ],
+    "キッチン": [
+     1220,
+     1350
+    ],
+    "リーダー": [
+     1350,
+     1450
+    ]
+   },
+   "is_minor": "各店0〜1名(フロアのみ・late不可)",
+   "absence_rate": "1〜18%で分布(平均6%)",
+   "can_help_stores": "同一エリア内の店舗を30%の確率で1〜2件付与",
+   "name_pool": "seed=42で日本人名を生成(既存25名と重複禁止)",
+   "submissions": "提出率72%・上記と同パターンで生成"
+  },
+  "note": "8店舗モードの55名はこの規則からseed固定で決定的に生成する(ファイル肥大の回避と拡張性の証明を兼ねる)"
+ },
+ "scenario_events": [
+  {
+   "id": "ev1",
+   "type": "absence",
+   "date": "2026-07-24",
+   "slot": "dinner",
+   "staff_id": "stf01",
+   "store_id": "st01",
+   "trigger": "金曜18:05に欠勤連絡が着信する演出",
+   "expected_candidates": [
+    "stf02",
+    "stf11",
+    "stf19"
+   ],
+   "fallback": "候補辞退時はstf12(関内・佐藤)の店舗間応援を提案(can_help_stores参照)"
+  },
+  {
+   "id": "ev2",
+   "type": "advice",
+   "date": "2026-07-25",
+   "slot": "dinner",
+   "store_id": "st01",
+   "insight": "土曜ディナーのskill4以上が高橋1名のみ(平常比-60%)。欠勤率上位者が2名含まれる構成",
+   "advice": "リーダー級をもう1名配置するか、両ポジ対応者を予備要員に指定することを推奨",
+   "closing_questions": [
+    "採用で解くか、時給で解くか、営業時間で解くか",
+    "土曜の客数予測に対しholdする人件費率の上限はいくつか"
+   ]
+  }
+ ],
+ "payroll_rules": {
+  "night_premium": "22:00以降+25%",
+  "overtime": "週40h超+25%",
+  "rounding": "1分単位"
+ },
+ "labor_rules": {
+  "weekly_cap_default": 40,
+  "break_required_over_hours": 6,
+  "minor_latest": "22:00",
+  "max_consecutive_days": 6
+ }
+}
