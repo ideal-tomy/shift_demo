@@ -1,4 +1,5 @@
 import { RoleTabs } from "./components/shell/RoleTabs";
+import { StoryBar } from "./components/shell/StoryBar";
 import { StaffProfileSheet } from "./components/StaffProfileSheet";
 import { Toast } from "./components/Toast";
 import { DemoProvider, useDemo } from "./state/DemoStore";
@@ -17,6 +18,7 @@ function Shell() {
         </div>
       </header>
       <RoleTabs />
+      <StoryBar />
       {role === "staff" ? <StaffView /> : null}
       {role === "manager" ? <ManagerView /> : null}
       {role === "owner" ? <OwnerView /> : null}

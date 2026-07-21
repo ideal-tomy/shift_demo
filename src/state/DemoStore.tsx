@@ -47,6 +47,26 @@ import type {
 const data = raw as MinatoyaData;
 const nextWeekBuilt = buildNextWeek(data.week);
 
+/** 商談デモの物語主人公（欠勤シナリオ同一） */
+export const PROTAGONIST_ID = "stf01";
+/** 主人公の所属店（横浜西口） */
+export const HOME_STORE_ID = "st01";
+
+export type StoryStep = 1 | 2 | 3 | 4;
+
+export type StoryNextAction = {
+  label: string;
+  run: () => void;
+};
+
+export type StoryState = {
+  current: StoryStep;
+  done: Record<StoryStep, boolean>;
+  hint: string;
+  nextAction: StoryNextAction | null;
+  protagonistName: string;
+};
+
 export type PlaceTarget = {
   store_id: string;
   date: string;
@@ -130,6 +150,10 @@ type DemoState = {
   ackCount: number;
   data: MinatoyaData;
   openAbsenceFromOwner: () => void;
+  story: StoryState;
+  focusProtagonistContext: (opts?: { role?: DemoRole }) => void;
+  protagonistId: string;
+  homeStoreId: string;
 };
 
 const Ctx = createContext<DemoState | null>(null);
@@ -151,10 +175,10 @@ function applyDraftDays(
 }
 
 export function DemoProvider({ children }: { children: ReactNode }) {
-  const [role, setRole] = useState<DemoRole>("manager");
+  const [role, setRole] = useState<DemoRole>("staff");
   const [scaleMode, setScaleModeState] = useState<ScaleMode>(3);
-  const [storeId, setStoreId] = useState("st01");
-  const [actingStaffId, setActingStaffId] = useState("stf04");
+  const [storeId, setStoreId] = useState(HOME_STORE_ID);
+  const [actingStaffId, setActingStaffId] = useState(PROTAGONIST_ID);
   const [submissions, setSubmissions] = useState<Submission[]>(data.submissions);
   const [shifts, setShifts] = useState<ShiftCell[]>([]);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -657,6 +681,132 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setAbsenceOpen(true);
   }, [absenceEvent]);
 
+  const focusProtagonistContext = useCallback(
+    (opts?: { role?: DemoRole }) => {
+      setActingStaffId(PROTAGONIST_ID);
+      setStoreId(HOME_STORE_ID);
+      if (opts?.role) setRole(opts.role);
+    },
+    [],
+  );
+
+  const protagonistName = useMemo(
+    () =>
+      staffInScope.find((s) => s.id === PROTAGONIST_ID)?.name ??
+      data.staff.find((s) => s.id === PROTAGONIST_ID)?.name ??
+      "田中 悠斗",
+    [staffInScope],
+  );
+
+  const story = useMemo((): StoryState => {
+    const done1 = submissions.some((s) => s.staff_id === PROTAGONIST_ID);
+    const done2 = shifts.some(
+      (c) =>
+        c.store_id === HOME_STORE_ID &&
+        (c.status === "proposed" || c.status === "confirmed"),
+    );
+    const note = notifications.find((n) => n.staff_id === PROTAGONIST_ID);
+    const done3 = confirmedOnce || Boolean(note);
+    const done4 = note?.status === "確認済み";
+    const done: Record<StoryStep, boolean> = {
+      1: done1,
+      2: done2,
+      3: done3,
+      4: done4,
+    };
+
+    let current: StoryStep = 1;
+    if (!done1) current = 1;
+    else if (!done2) current = 2;
+    else if (!done3) current = 3;
+    else if (!done4) current = 4;
+    else current = 4;
+
+    let hint = "";
+    let nextAction: StoryNextAction | null = null;
+
+    if (!done1) {
+      hint = `${protagonistName}として希望を下書きし、提出してください`;
+      nextAction =
+        role !== "staff"
+          ? {
+              label: "スタッフタブへ",
+              run: () => {
+                setActingStaffId(PROTAGONIST_ID);
+                setStoreId(HOME_STORE_ID);
+                setRole("staff");
+              },
+            }
+          : null;
+    } else if (!done2) {
+      hint = `${protagonistName}の希望は提出済み。次は店長で最適案`;
+      nextAction =
+        role !== "manager"
+          ? {
+              label: "次は店長タブ",
+              run: () => {
+                setStoreId(HOME_STORE_ID);
+                setRole("manager");
+              },
+            }
+          : {
+              label: "横浜西口店に合わせる",
+              run: () => setStoreId(HOME_STORE_ID),
+            };
+      if (role === "manager" && storeId === HOME_STORE_ID) {
+        nextAction = null;
+        hint = `${protagonistName}の店で「最適案を作る」を押してください`;
+      }
+    } else if (!done3) {
+      hint = "最適案ができました。店長で「確定して通知」へ";
+      nextAction =
+        role !== "manager"
+          ? {
+              label: "店長タブへ",
+              run: () => {
+                setStoreId(HOME_STORE_ID);
+                setRole("manager");
+              },
+            }
+          : null;
+    } else if (!done4) {
+      hint = "確定シフトを通知済み。スタッフで確認してください";
+      nextAction =
+        role !== "staff"
+          ? {
+              label: "次はスタッフで確認",
+              run: () => {
+                setActingStaffId(PROTAGONIST_ID);
+                setStoreId(HOME_STORE_ID);
+                setRole("staff");
+              },
+            }
+          : null;
+    } else {
+      hint = "一連の流れは完了。欠勤対応も同じ田中さんで追えます";
+      nextAction =
+        role !== "manager"
+          ? {
+              label: "欠勤対応は店長へ",
+              run: () => {
+                setStoreId(HOME_STORE_ID);
+                setRole("manager");
+              },
+            }
+          : null;
+    }
+
+    return { current, done, hint, nextAction, protagonistName };
+  }, [
+    submissions,
+    shifts,
+    notifications,
+    confirmedOnce,
+    protagonistName,
+    role,
+    storeId,
+  ]);
+
   const helpPoolCount = countHelpPool(staff, storeId, "フロア");
   const laborAlerts = useMemo(
     () => computeLaborAlerts(shifts, staff),
@@ -771,6 +921,10 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     ackCount: notifications.filter((n) => n.status === "確認済み").length,
     data,
     openAbsenceFromOwner,
+    story,
+    focusProtagonistContext,
+    protagonistId: PROTAGONIST_ID,
+    homeStoreId: HOME_STORE_ID,
   };
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

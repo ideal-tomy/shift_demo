@@ -14,16 +14,21 @@ export function StaffView() {
   const mySub = d.submissions.find((s) => s.staff_id === d.actingStaffId);
   const myNote = d.notifications.find((n) => n.staff_id === d.actingStaffId);
 
-  const storeStaff = useMemo(
-    () => d.staff.filter((s) => s.store_id === (me?.store_id ?? "st01")),
-    [d.staff, me?.store_id],
-  );
+  const storeStaff = useMemo(() => {
+    const list = d.staff.filter((s) => s.store_id === (me?.store_id ?? d.homeStoreId));
+    return [...list].sort((a, b) => {
+      if (a.id === d.protagonistId) return -1;
+      if (b.id === d.protagonistId) return 1;
+      return 0;
+    });
+  }, [d.staff, me?.store_id, d.homeStoreId, d.protagonistId]);
 
   const activeWeek = weekMode === "this" ? d.week : d.nextWeek;
   const store = d.stores.find((s) => s.id === me?.store_id);
   const slots = d.timeSlots.filter(
     (s) => store?.has_late_slot || s.id !== "late",
   );
+  const isProtagonist = d.actingStaffId === d.protagonistId;
 
   const cellKind = (date: string, slotId: string): StaffCellKind => {
     const confirmed = d.shifts.some(
@@ -70,6 +75,12 @@ export function StaffView() {
   return (
     <div className="viewBody hasBottomBar">
       <div className="stickyHead staffSticky">
+        <div className="staffBelong">
+          <span className="belongLabel">所属: {store?.name ?? "—"}</span>
+          {isProtagonist ? (
+            <span className="heroBadge">デモ主人公</span>
+          ) : null}
+        </div>
         <select
           className="selectCtrl grow"
           value={d.actingStaffId}
@@ -78,7 +89,7 @@ export function StaffView() {
         >
           {storeStaff.map((s) => (
             <option key={s.id} value={s.id}>
-              {s.name}
+              {s.id === d.protagonistId ? `${s.name}（主人公）` : s.name}
             </option>
           ))}
         </select>
@@ -99,6 +110,10 @@ export function StaffView() {
           </button>
         </div>
       </div>
+
+      <p className="note storeAlignHint">
+        店長タブでは同じ店（{store?.name ?? "横浜西口店"}）を選ぶと名簿が一致します
+      </p>
 
       <WeekGrid
         mode="staff"

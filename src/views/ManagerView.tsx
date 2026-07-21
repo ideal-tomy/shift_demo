@@ -115,6 +115,12 @@ export function ManagerView() {
         ) : null}
       </div>
 
+      {d.scaleMode === 8 ? (
+        <p className="note scaleGenNote">
+          8店舗モード: 追加スタッフはデモ用の生成名です。操作は同じで、候補だけ増えます
+        </p>
+      ) : null}
+
       <TimeCounter />
 
       {d.liveLog.length > 0 ? (
@@ -197,8 +203,13 @@ export function ManagerView() {
 
       {absence && hasProposed && !d.absenceResolved ? (
         <div className="card">
-          <h3>欠勤連絡</h3>
-          <p className="note">{absence.trigger}</p>
+          <h3>欠勤連絡 · {d.story.protagonistName}</h3>
+          <p className="note">
+            {absence.trigger ?? "欠勤連絡が着信しました"}
+          </p>
+          <p className="note">
+            デモ主人公の{d.story.protagonistName}さんからの連絡です
+          </p>
           <button
             type="button"
             className="dangerBtn"

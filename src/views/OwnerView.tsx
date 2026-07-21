@@ -163,10 +163,19 @@ export function OwnerView() {
                   className={`chip${d.scaleMode === m ? " active" : ""}`}
                   onClick={() => d.setScaleMode(m)}
                 >
-                  {m}店舗
+                  {m === 3 ? "3店舗（商談基本）" : `${m}店舗`}
                 </button>
               ))}
             </div>
+            {d.scaleMode === 8 ? (
+              <p className="note scaleGenNote">
+                追加55名はデモ用の生成名です。操作は同じで、候補だけ増えます
+              </p>
+            ) : (
+              <p className="note">
+                商談は基本3店舗・実名25名。8店舗は「増えても同じ操作」の証明用
+              </p>
+            )}
             <p className="note tnum">
               スタッフ {d.staffTotal} / 店舗 {d.stores.length} / 候補{" "}
               {d.helpPoolCount}

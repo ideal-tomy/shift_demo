@@ -28,6 +28,16 @@
 - 環境変数: `VITE_ROI_SIMULATOR_URL`（**オリジンのみ**。例 `https://roi-simulator-eta.vercel.app`）。`?brand=` は env に付けない（`roiLink.ts` が付与）
 - 未設定時: CTA 非表示
 
+### 入口 UX（roi-simulator 側・`?kit=` 入場）
+
+| 挙動 | 内容 |
+|---|---|
+| ヒーロー | `shift-management.json` の `hero`（飲食・シフト向け文言）。業種カテゴリの generic 文言は使わない |
+| 自動スクロール | マウント後、見積質問（ウィザード）へスクロール |
+| 非表示 | 業界ピッカー／キット切替バー（デモ直リンクを最短にする） |
+
+他デモも同じパターンで、各 kit JSON に `hero: { eyebrow, title, lead }` を足す。
+
 ---
 
 ## 2. CTA 表示タイミング
