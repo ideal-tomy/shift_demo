@@ -37,9 +37,8 @@ export function WeekGrid(props: Props) {
     <div className="weekGrid">
       <div />
       {week.map((date, i) => (
-        <div key={date} className="weekHead">
-          {WEEKDAY_SHORT[i]}
-          <br />
+        <div key={date} className="weekHead" aria-label={`${WEEKDAY_SHORT[i]} ${date}`}>
+          <span>{WEEKDAY_SHORT[i]}</span>
           <span className="tnum">{date.slice(8)}</span>
         </div>
       ))}
