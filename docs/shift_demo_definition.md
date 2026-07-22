@@ -117,6 +117,7 @@ Default: `sample`
 - 副表示: 店長面「確定して通知」成功後
 - 未設定時: CTA 非表示（体験本体は不変）
 - やらないこと: 試算ロジック複製 / iframe / postMessage
+- 出口: 「見積もりを閉じる」→ 閲覧モード（業界選択可）。詳細はプレイブック §1.2
 
 実装済み: `src/lib/roiLink.ts` / `src/components/RoiPaybackCta.tsx`
 
