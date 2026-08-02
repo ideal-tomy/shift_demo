@@ -45,7 +45,7 @@
 | モード | **閲覧モード**（業界・カテゴリ選択可） |
 | クリア | `kit` と見積回答のみ |
 | 維持 | `industry=other` / `cat=dashboard` / `from=shift-minatoya` / `brand=ideal` |
-| 表示 | 業界ピッカー・カテゴリタブ・「概算見積もりを開く」 |
+| 表示 | 業界ピッカー・カテゴリタブ・「概算見積もりへ」 |
 | ヒーロー | 業種カテゴリ文言（その他 × 管理・経営）へ戻る |
 
 正本: [`demo-roi-integration-playbook.md`](../../roi-simulator/docs/demo-roi-integration-playbook.md) §1.2。飲食専用 preset が無いあいだは閉じた後も `other` だが、業界切替は可能にする。
